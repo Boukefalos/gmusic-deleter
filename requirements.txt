@@ -1,0 +1,2 @@
+git+git://github.com/liamks/pyitunes.git
+git+git://github.com/simon-weber/Unofficial-Google-Music-API
