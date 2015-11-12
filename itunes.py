@@ -13,21 +13,34 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
+
 from pyItunes import *
 from gmusicapi import Mobileclient
 
 # iTunes songs
-l = Library("<full path to iTunes Music Library.xml>")
+l = Library('<full path to iTunes Music Library.xml>')
 songs = [(song.artist, song.name) for id,song in l.songs.items()]
 
 # Google Music songs
 api = Mobileclient()
-api.login('<account>', '<password>')
+api.login('<account>', '<password>', Mobileclient.FROM_MAC_ADDRESS)
 library = api.get_all_songs()
 
 # Find songs to delete
 delete = filter(lambda song: (song['artist'], song['title']) not in songs, library)
 delete = [song['id'] for song in delete]
 
-# Delete songs
-api.delete_songs(delete)
+if len(delete):
+    # Display songs
+    print "Duplicate songs"
+    old_song_ids = []
+    for key in sorted(delete):
+        key = '%s: %d-%02d %s' % (song.get('album'), song.get('discNumber'), song.get('trackNumber'), song.get('title'))
+        print "    " + key.encode('utf-8')
+
+    # Delete songs
+    if raw_input( "Delete duplicate songs? (y, n): ") is 'y':
+        print "Deleting songs..."
+        api.delete_songs(delete)
+else:
+    print 'No deleted songs'

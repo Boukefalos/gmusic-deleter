@@ -1,6 +1,6 @@
-# Delete songs from Google Music that you deleted from iTunes
+# Delete unwanted songs from Google Music
 
-Google Music Manager can automatically upload songs from your local iTunes library to Google Music. When you delete songs from you iTunes library, however, they remain to exist in you Google Music library. This script automates the tedious process of deleting songs from Google Music manually.
+Google Music Manager can automatically upload songs from your local iTunes library to Google Music. When you delete songs from you iTunes library, however, they remain to exist in you Google Music library. Two scripts automate the tedious process of deleting those (and duplicated) songs from Google Music manually.
 
 ## Installation
 This script relies on [pyItunes][1] and [Unofficial-Google-Music-API][2]. Installation of these dependencies is easy using pip:
@@ -19,7 +19,11 @@ Generate an application specific password for your google account: https://secur
 
 Just alter the values in broken brackets and run the script:
 ```
-python delete.py
+python itunes.py
+```
+or
+```
+python duplicates.py
 ```
 
   [1]: https://github.com/liamks/pyitunes
